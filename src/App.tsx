@@ -1,29 +1,25 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './App.module.css'
 import './App.css';
-import {Counter} from "./Components/Counter";
-import {Button} from "./Components/Button";
-import {findAllByDisplayValue} from "@testing-library/react";
+import {CountResult} from "./Components/CountResult";
+import {CountSet} from "./Components/CountSet";
 
 function App() {
-    let minCount = 0
-    let maxCount = 5
-    let [count, setCount] = useState(minCount)
-    const changeCount = () => {
-        setCount(count + 1)
+    let [minValue, setMinValue] = useState(0)
+    let [maxValue, setMaxValue] = useState(1)
+
+    const changingMinValue =(e:ChangeEvent<HTMLInputElement>)=> {
+        let newMinValue = Number(e.currentTarget.value)
+        setMinValue(newMinValue)
     }
-    const resetCount = () => {
-        setCount(minCount)
+    const changingMaxValue =(e:ChangeEvent<HTMLInputElement>)=> {
+        let newMaxValue = Number(e.currentTarget.value)
+        setMaxValue(newMaxValue)
     }
     return (
-        <div className={s.container}>
-            <div className={s.counter}>
-                <Counter count={count} maxCount={maxCount}/>
-            </div>
-            <div className={s.buttonBlock}>
-                <Button callback={changeCount} title={'Inc'} count={count === maxCount}/>
-                <Button callback={resetCount} title={'Reset'} count={count === minCount}/>
-            </div>
+        <div className={s.bothCounters}>
+            <CountSet minValue={minValue} maxValue={maxValue} setMinValue={changingMinValue} setMaxValue={changingMaxValue}/>
+           <CountResult minValue={minValue} maxValue={maxValue}/>
         </div>
 
     )
