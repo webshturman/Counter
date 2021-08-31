@@ -13,7 +13,7 @@ export const CountResult: React.FC<CountResultPropsType> = ({minValue,maxValue})
     let maxCount = maxValue
     let [count, setCount] = useState(minCount)
     const changeCount = () => {
-        setCount(count + 1)
+            setCount(count + 1)
     }
     const resetCount = () => {
         setCount(minCount)

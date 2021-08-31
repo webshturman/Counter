@@ -9,12 +9,14 @@ type CountSetPropsType = {
     maxValue: number
     setMinValue: (e:ChangeEvent<HTMLInputElement>) => void
     setMaxValue: (e:ChangeEvent<HTMLInputElement>) => void
+    setToStorage: () => void
 }
 
-export const CountSet: React.FC<CountSetPropsType> = ({minValue, maxValue,setMaxValue, setMinValue}) => {
-    const settingCount = () => {
-        console.log('Success')
-    }
+export const CountSet: React.FC<CountSetPropsType> = ({minValue, maxValue,setMaxValue, setMinValue, setToStorage}) => {
+    let disabledCondition = maxValue===minValue || minValue < 0
+    // const settingCount = () => {
+    //     console.log('Success')
+    // }
     return (
         <div className={s.container}>
             <div className={s.countSetter}>
@@ -22,7 +24,7 @@ export const CountSet: React.FC<CountSetPropsType> = ({minValue, maxValue,setMax
                 <InputSet title={'Start value'} value={minValue} changingValue={setMinValue}/>
             </div>
             <div className={s.buttonBlock}>
-                <Button callback={settingCount} title={'Set'} count={true}/>
+                <Button callback={setToStorage} title={'Set'} count={disabledCondition}/>
             </div>
         </div>
     );

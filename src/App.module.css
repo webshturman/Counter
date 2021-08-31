@@ -65,6 +65,6 @@
     font-weight: bold;
 }
 
-/*.spanInputValue {*/
-/*    font-size: 18px;*/
-/*}*/
+.spanInputValue {
+    text-align: center;
+}

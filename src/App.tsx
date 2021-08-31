@@ -16,9 +16,24 @@ function App() {
         let newMaxValue = Number(e.currentTarget.value)
         setMaxValue(newMaxValue)
     }
+    const setToStorage =()=> {
+        localStorage.setItem('set minValue',JSON.stringify(minValue));
+        localStorage.setItem('set maxValue',JSON.stringify(maxValue))
+    }
+    // const getFromStorage =()=> {
+    //     let minFromString = localStorage.getItem('set minValue');
+    //     if(minFromString ){
+    //         let newMinValue = JSON.parse(minFromString)
+    //         setMinValue(newMinValue)
+    //     }
+    // }
     return (
         <div className={s.bothCounters}>
-            <CountSet minValue={minValue} maxValue={maxValue} setMinValue={changingMinValue} setMaxValue={changingMaxValue}/>
+            <CountSet minValue={minValue} maxValue={maxValue}
+                      setMinValue={changingMinValue}
+                      setMaxValue={changingMaxValue}
+                      setToStorage={setToStorage}
+            />
            <CountResult minValue={minValue} maxValue={maxValue}/>
         </div>
 
