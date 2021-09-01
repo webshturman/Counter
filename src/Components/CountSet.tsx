@@ -3,20 +3,25 @@ import s from "../App.module.css";
 import {Counter} from "./Counter";
 import {Button} from "./Button";
 import {InputSet} from "./InputSet";
+import {getFromStorage, setToStorage} from "../App";
 
 type CountSetPropsType = {
     minValue: number
     maxValue: number
     setMinValue: (e:ChangeEvent<HTMLInputElement>) => void
     setMaxValue: (e:ChangeEvent<HTMLInputElement>) => void
-    setToStorage: () => void
+    setCount: (value:number)=>void
+    setCorrectData: (correctData:boolean) => void
 }
 
-export const CountSet: React.FC<CountSetPropsType> = ({minValue, maxValue,setMaxValue, setMinValue, setToStorage}) => {
-    let disabledCondition = maxValue===minValue || minValue < 0
-    // const settingCount = () => {
-    //     console.log('Success')
-    // }
+export const CountSet: React.FC<CountSetPropsType> = (
+    {minValue, maxValue,setMaxValue, setMinValue,setCount,setCorrectData}
+) => {
+    let disabledCondition = minValue >= maxValue || minValue < 0
+    const settingCount = () => {
+        setCount(minValue)
+        setCorrectData(true)
+    }
     return (
         <div className={s.container}>
             <div className={s.countSetter}>
@@ -24,7 +29,7 @@ export const CountSet: React.FC<CountSetPropsType> = ({minValue, maxValue,setMax
                 <InputSet title={'Start value'} value={minValue} changingValue={setMinValue}/>
             </div>
             <div className={s.buttonBlock}>
-                <Button callback={setToStorage} title={'Set'} count={disabledCondition}/>
+                <Button callback={settingCount} title={'Set'} condition={disabledCondition}/>
             </div>
         </div>
     );

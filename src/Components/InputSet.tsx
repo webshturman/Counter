@@ -8,7 +8,7 @@ type InputSetPropsType = {
 }
 export const InputSet: React.FC<InputSetPropsType> = ({title, value,changingValue}) => {
     return (
-        <div>
+        <div className={s.inputValueBlock}>
             <span className={s.spanInputTitle}>{title}:</span>
             <input value={value} type="number" onChange={changingValue} className={s.spanInputValue}/>
         </div>
