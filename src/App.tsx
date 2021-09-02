@@ -5,32 +5,30 @@ import {CountResult} from "./Components/CountResult";
 import {CountSet} from "./Components/CountSet";
 
 
-export const getFromStorage = (key:string)=> {
+export const getFromStorage = (key:string, defaultValue:number)=> {
+    let newValue = defaultValue
     let storageItem = localStorage.getItem(key);
-    if(storageItem){
-        return JSON.parse(storageItem)
+    if(storageItem !== null){
+        newValue = JSON.parse(storageItem)
     }
+    return newValue
 }
 export const setToStorage =(key:string, value:number)=> {
     localStorage.setItem(key,JSON.stringify(value));
 }
 
 function App() {
-    let [minValue, setMinValue] = useState(getFromStorage('set minValue') ? getFromStorage('set minValue') : 0)
-    let [maxValue, setMaxValue] = useState(getFromStorage('set maxValue') ? getFromStorage('set maxValue') : 1)
-    let [count, setCount] = useState(getFromStorage('set count') ? getFromStorage('set count') : minValue)
+    let [minValue, setMinValue] = useState(getFromStorage('set minValue',0))
+    let [maxValue, setMaxValue] = useState(getFromStorage('set maxValue', 1))
+    let [count, setCount] = useState(getFromStorage('set count',minValue))
     let [correctData, setCorrectData] = useState(true)
     // const disabledCondition = minValue >= maxValue || minValue < 0
 //-----------------------------------------------------------------
-    useEffect( () =>{
-        setCount(getFromStorage('set count'));
-        setMinValue(getFromStorage('set minValue'));
-        setMaxValue(getFromStorage('set maxValue'));
-    },[])
+
     useEffect(()=> {
-        setToStorage('set count',count);
         setToStorage('set minValue',minValue);
-        setToStorage('set maxValue',maxValue)
+        setToStorage('set maxValue',maxValue);
+        setToStorage('set count',count);
     },[minValue,maxValue,count])
 //---------------------------------------------------------------------------------------
     const changingMinValue =(e:ChangeEvent<HTMLInputElement>)=> {
@@ -52,7 +50,7 @@ function App() {
                       setCount={setCount}
                       setCorrectData={setCorrectData}
             />
-           <CountResult count={count} minValue={minValue}maxValue={maxValue}
+           <CountResult count={count} minValue={minValue} maxValue={maxValue}
                         setCount={setCount}
                         correctData={correctData}/>
         </div>

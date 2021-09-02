@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import s from "../App.module.css";
 import {Counter} from "./Counter";
 import {Button} from "./Button";

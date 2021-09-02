@@ -1,9 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import s from "../App.module.css";
-import {Counter} from "./Counter";
 import {Button} from "./Button";
 import {InputSet} from "./InputSet";
-import {getFromStorage, setToStorage} from "../App";
 
 type CountSetPropsType = {
     minValue: number
