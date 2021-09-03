@@ -45,8 +45,8 @@
 .limit {
     color: red;
 }
-.message {
-    font-size: 22px;
+.message,.errorClass {
+    font-size: 26px;
     color:blue;
 }
 /*//----------------------------------------------------------------------*/
@@ -80,9 +80,16 @@
 .spanInputTitle{
     /*height: 30px;*/
 }
-.spanInputValue {
+.spanInputValue, .redInput {
     text-align: center;
     width: 100px;
     font-size: 20px;
     /*border-radius: 2px;*/
+}
+.redInput{
+    background-color: red;
+}
+.errorClass {
+    color: red;
+    font-size: 30px;
 }

@@ -22,7 +22,7 @@ function App() {
     let [maxValue, setMaxValue] = useState(getFromStorage('set maxValue', 1))
     let [count, setCount] = useState(getFromStorage('set count',minValue))
     let [correctData, setCorrectData] = useState(true)
-    // const disabledCondition = minValue >= maxValue || minValue < 0
+     const error = minValue >= maxValue || minValue < 0
 //-----------------------------------------------------------------
 
     useEffect(()=> {
@@ -49,10 +49,11 @@ function App() {
                       setMaxValue={changingMaxValue}
                       setCount={setCount}
                       setCorrectData={setCorrectData}
+                      error={error}
             />
            <CountResult count={count} minValue={minValue} maxValue={maxValue}
                         setCount={setCount}
-                        correctData={correctData}/>
+                        correctData={correctData} error={error}/>
         </div>
 
     )

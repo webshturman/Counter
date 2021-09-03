@@ -9,10 +9,11 @@ type CountResultPropsType ={
     maxValue: number
     setCount: (value:number)=>void
     correctData:boolean
+    error:boolean
 }
 
 export const CountResult: React.FC<CountResultPropsType> = (
-    {count, minValue, correctData, maxValue,setCount}
+    {count, minValue, correctData, maxValue,setCount,error}
 ) => {
 
     const changeCount = () => {
@@ -24,7 +25,7 @@ export const CountResult: React.FC<CountResultPropsType> = (
     return (
         <div className={s.container}>
             <div className={s.counter}>
-                <Counter count={count} maxCount={maxValue} correctData={correctData}/>
+                <Counter count={count} maxCount={maxValue} correctData={correctData} error={error}/>
             </div>
             <div className={s.buttonBlock}>
                 <Button callback={changeCount} title={'Inc'} condition={count === maxValue || !correctData}/>

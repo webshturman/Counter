@@ -10,12 +10,13 @@ type CountSetPropsType = {
     setMaxValue: (e:ChangeEvent<HTMLInputElement>) => void
     setCount: (value:number)=>void
     setCorrectData: (correctData:boolean) => void
+    error:boolean
 }
 
 export const CountSet: React.FC<CountSetPropsType> = (
-    {minValue, maxValue,setMaxValue, setMinValue,setCount,setCorrectData}
+    {minValue, maxValue,setMaxValue, setMinValue,setCount,setCorrectData,error}
 ) => {
-    let disabledCondition = minValue >= maxValue || minValue < 0
+    // let disabledCondition = minValue >= maxValue || minValue < 0
     const settingCount = () => {
         setCount(minValue)
         setCorrectData(true)
@@ -23,11 +24,11 @@ export const CountSet: React.FC<CountSetPropsType> = (
     return (
         <div className={s.container}>
             <div className={s.countSetter}>
-                <InputSet title={'Max value'} value={maxValue} changingValue={setMaxValue}/>
-                <InputSet title={'Start value'} value={minValue} changingValue={setMinValue}/>
+                <InputSet title={'Max value'} value={maxValue} changingValue={setMaxValue} error={error}/>
+                <InputSet title={'Start value'} value={minValue} changingValue={setMinValue} error={error}/>
             </div>
             <div className={s.buttonBlock}>
-                <Button callback={settingCount} title={'Set'} condition={disabledCondition}/>
+                <Button callback={settingCount} title={'Set'} condition={error}/>
             </div>
         </div>
     );
