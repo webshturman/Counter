@@ -6,8 +6,8 @@ import {InputSet} from "./InputSet";
 type CountSetPropsType = {
     minValue: number
     maxValue: number
-    setMinValue: (e:ChangeEvent<HTMLInputElement>) => void
-    setMaxValue: (e:ChangeEvent<HTMLInputElement>) => void
+    setMinValue: (newInputValue:number) => void
+    setMaxValue: (newInputValue:number) => void
     setCount: (value:number)=>void
     setCorrectData: (correctData:boolean) => void
     error:boolean

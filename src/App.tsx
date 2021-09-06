@@ -31,14 +31,12 @@ function App() {
         setToStorage('set count',count);
     },[minValue,maxValue,count])
 //---------------------------------------------------------------------------------------
-    const changingMinValue =(e:ChangeEvent<HTMLInputElement>)=> {
-        let newMinValue = Number(e.currentTarget.value)
-        setMinValue(newMinValue)
+    const changingMinValue =(newInputValue:number)=> {
+        setMinValue(newInputValue)
         setCorrectData(false)
     }
-    const changingMaxValue =(e:ChangeEvent<HTMLInputElement>)=> {
-        let newMaxValue = Number(e.currentTarget.value)
-        setMaxValue(newMaxValue)
+    const changingMaxValue =(newInputValue:number)=> {
+        setMaxValue(newInputValue)
         setCorrectData(false)
     }
  //----------------------------------------------------------------------------------------------
