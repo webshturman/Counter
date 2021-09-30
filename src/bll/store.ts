@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
 })
 // // let PreloadedState= getFromStorage('set state',InitialState)
 let PreloadedState
-let IncomingState = localStorage.getItem('set state');
+let IncomingState = localStorage.getItem('set count');
 if(IncomingState !== null){
     PreloadedState = JSON.parse(IncomingState)
 }
@@ -18,8 +18,8 @@ export const store = createStore(rootReducer, PreloadedState)
 
 
 store.subscribe( ()=> {
-    localStorage.setItem('set state', JSON.stringify(store.getState()));
-    localStorage.setItem('set count', JSON.stringify(store.getState().counter.count));
+    // localStorage.setItem('set state', JSON.stringify(store.getState()));
+    localStorage.setItem('set count', JSON.stringify(store.getState()));
 })
 
 

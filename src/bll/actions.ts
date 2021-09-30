@@ -16,7 +16,7 @@ export type changeMaxValueType = {
 }
 export type changeCountResultType = {
     type:ACTIONS_TYPE.CHANGE_COUNTER_RESULT_TYPE,
-    payload: {count:number}
+   count:number
 }
 export const changeMinValueAC = (minValue:number):changeMinValueType => {
     return {type:ACTIONS_TYPE.CHANGE_MIN_VALUE_TYPE, payload:{minValue}}
@@ -25,5 +25,5 @@ export const changeMaxValueAC = (maxValue:number):changeMaxValueType => {
     return {type:ACTIONS_TYPE.CHANGE_MAX_VALUE_TYPE, payload:{maxValue}}
 }
 export const changeCountResultAC = (count:number):changeCountResultType => {
-    return {type:ACTIONS_TYPE.CHANGE_COUNTER_RESULT_TYPE, payload:{count}}
+    return {type:ACTIONS_TYPE.CHANGE_COUNTER_RESULT_TYPE, count}
 }

@@ -21,7 +21,7 @@ export const CountResult: React.FC<CountResultPropsType> = ({correctData, error}
     const {minValue, maxValue,count} = useSelector<RootStateType, InitialStateType>( state => state.counter)
 
     const changeCount = () => {
-        dispatch(changeCountResultAC(count + 1))
+        dispatch(changeCountResultAC(count))
     }
     const resetCount = () => {
         dispatch(changeCountResultAC(minValue))
