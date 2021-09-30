@@ -2,25 +2,29 @@ import React from 'react';
 import s from "../App.module.css";
 import {Counter} from "./Counter";
 import {Button} from "./Button";
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "../bll/store";
+import {InitialStateType} from "../bll/counter-reducer";
+import {changeCountResultAC} from "../bll/actions";
 
 type CountResultPropsType ={
-    count: number
-    minValue: number
-    maxValue: number
-    setCount: (value:number)=>void
+    // count: number
+    // minValue: number
+    // maxValue: number
+    // setCount: (value:number)=>void
     correctData:boolean
     error:boolean
 }
 
-export const CountResult: React.FC<CountResultPropsType> = (
-    {count, minValue, correctData, maxValue,setCount,error}
-) => {
+export const CountResult: React.FC<CountResultPropsType> = ({correctData, error}) => {
+    const dispatch = useDispatch()
+    const {minValue, maxValue,count} = useSelector<RootStateType, InitialStateType>( state => state.counter)
 
     const changeCount = () => {
-            setCount(count + 1)
+        dispatch(changeCountResultAC(count + 1))
     }
     const resetCount = () => {
-        setCount(minValue)
+        dispatch(changeCountResultAC(minValue))
     }
     return (
         <div className={s.container}>
