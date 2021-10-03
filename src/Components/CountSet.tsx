@@ -8,11 +8,6 @@ import {InitialStateType} from "../bll/counter-reducer";
 import {changeCountResultAC, changeMaxValueAC, changeMinValueAC} from "../bll/actions";
 
 type CountSetPropsType = {
-    // minValue: number
-    // maxValue: number
-    // setMinValue: (newInputValue:number) => void
-    // setMaxValue: (newInputValue:number) => void
-    // setCount: (value:number)=>void
     setCorrectData: (correctData:boolean) => void
     error:boolean
 }
