@@ -4,33 +4,33 @@ import {Counter} from "./Counter";
 import {Button} from "./Button";
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../bll/store";
-import {InitialStateType} from "../bll/counter-reducer";
-import {changeCountResultAC} from "../bll/actions";
+import {CountDataType} from "../bll/counter-reducer";
+import {changeCountResultAC, resetCountResultAC} from "../bll/actions";
 
 type CountResultPropsType ={
     correctData:boolean
-    error:boolean
 }
 
-export const CountResult: React.FC<CountResultPropsType> = ({correctData, error}) => {
+export const CountResult: React.FC<CountResultPropsType> = React.memo(({correctData}) => {
     const dispatch = useDispatch()
-    const {minValue, maxValue,count} = useSelector<RootStateType, InitialStateType>( state => state.counter)
+    const {minValue, maxValue, count} = useSelector<RootStateType, CountDataType>( state => state.counter.countData)
 
     const changeCount = () => {
         dispatch(changeCountResultAC(count))
     }
     const resetCount = () => {
-        dispatch(changeCountResultAC(minValue))
+        dispatch(resetCountResultAC(minValue))
     }
     return (
         <div className={s.container}>
             <div className={s.counter}>
-                <Counter count={count} maxCount={maxValue} correctData={correctData} error={error}/>
+                {/*<Counter count={count} maxCount={maxValue} correctData={correctData}/>*/}
+                <Counter correctData={correctData}/>
             </div>
             <div className={s.buttonBlock}>
                 <Button callback={changeCount} title={'Inc'} condition={count === maxValue || !correctData}/>
-                <Button callback={resetCount} title={'Reset'} condition={count ===minValue || !correctData}/>
+                <Button callback={resetCount} title={'Reset'} condition={count === minValue || !correctData}/>
             </div>
         </div>
     );
-};
+});

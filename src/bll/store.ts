@@ -18,7 +18,7 @@ export const store = createStore(rootReducer, PreloadedState)
 
 store.subscribe( ()=> {
     // localStorage.setItem('set state', JSON.stringify(store.getState()));
-    localStorage.setItem('set count', JSON.stringify(store.getState()));
+    localStorage.setItem('set count', JSON.stringify(store.getState()))
 })
 
 

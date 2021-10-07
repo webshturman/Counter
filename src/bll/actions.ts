@@ -2,8 +2,9 @@ export enum ACTIONS_TYPE {
     CHANGE_MAX_VALUE_TYPE = 'CounterSet/CHANGE_MAX_VALUE_TYPE',
     CHANGE_MIN_VALUE_TYPE = 'CounterSet/CHANGE_MIN_VALUE_TYPE',
     CHANGE_COUNTER_RESULT_TYPE = 'CounterResult/CHANGE_COUNTER_RESULT_TYPE ',
+    RESET_COUNTER_RESULT_TYPE = 'CounterResult/RESET_COUNTER_RESULT_TYPE ',
 }
-export type ActionType = changeMinValueType | changeMaxValueType | changeCountResultType
+export type ActionType = changeMinValueType | changeMaxValueType | changeCountResultType | resetCountResultType
 
 export type changeMinValueType = {
     type:ACTIONS_TYPE.CHANGE_MIN_VALUE_TYPE,
@@ -16,7 +17,11 @@ export type changeMaxValueType = {
 }
 export type changeCountResultType = {
     type:ACTIONS_TYPE.CHANGE_COUNTER_RESULT_TYPE,
-   count:number
+    count:number
+}
+export type resetCountResultType = {
+    type:ACTIONS_TYPE.RESET_COUNTER_RESULT_TYPE ,
+    payload: {count:number}
 }
 export const changeMinValueAC = (minValue:number):changeMinValueType => {
     return {type:ACTIONS_TYPE.CHANGE_MIN_VALUE_TYPE, payload:{minValue}}
@@ -26,4 +31,7 @@ export const changeMaxValueAC = (maxValue:number):changeMaxValueType => {
 }
 export const changeCountResultAC = (count:number):changeCountResultType => {
     return {type:ACTIONS_TYPE.CHANGE_COUNTER_RESULT_TYPE, count}
+}
+export const resetCountResultAC = (count:number):resetCountResultType => {
+    return {type:ACTIONS_TYPE.RESET_COUNTER_RESULT_TYPE, payload:{count}}
 }

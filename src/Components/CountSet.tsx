@@ -4,19 +4,18 @@ import {Button} from "./Button";
 import {InputSet} from "./InputSet";
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../bll/store";
-import {InitialStateType} from "../bll/counter-reducer";
-import {changeCountResultAC, changeMaxValueAC, changeMinValueAC} from "../bll/actions";
+import {CountDataType} from "../bll/counter-reducer";
+import {changeMaxValueAC, changeMinValueAC, resetCountResultAC} from "../bll/actions";
 
 type CountSetPropsType = {
     setCorrectData: (correctData:boolean) => void
-    error:boolean
 }
 
-export const CountSet: React.FC<CountSetPropsType> = ({setCorrectData,error}) => {
+export const CountSet: React.FC<CountSetPropsType> = React.memo(({setCorrectData}) => {
     // let disabledCondition = minValue >= maxValue || minValue < 0
 
     const dispatch = useDispatch()
-    const {minValue, maxValue} = useSelector<RootStateType, InitialStateType>( state => state.counter)
+    const {minValue, maxValue} = useSelector<RootStateType, CountDataType>( state => state.counter.countData)
 
     const changingMinValue =(newInputValue:number)=> {
         dispatch(changeMinValueAC(newInputValue))
@@ -28,19 +27,19 @@ export const CountSet: React.FC<CountSetPropsType> = ({setCorrectData,error}) =>
     }
 
     const settingCount = () => {
-        dispatch(changeCountResultAC(minValue))
+        dispatch(resetCountResultAC(minValue))
         setCorrectData(true)
     }
     return (
         <div className={s.container}>
             <div className={s.countSetter}>
-                <InputSet title={'Max value'} value={maxValue} changingValue={changingMaxValue} error={error}/>
-                <InputSet title={'Start value'} value={minValue} changingValue={changingMinValue} error={error}/>
+                <InputSet title={'Max value'} value={maxValue} changingValue={changingMaxValue}/>
+                <InputSet title={'Start value'} value={minValue} changingValue={changingMinValue}/>
             </div>
             <div className={s.buttonBlock}>
-                <Button callback={settingCount} title={'Set'} condition={error}/>
+                <Button callback={settingCount} title={'Set'}/>
             </div>
         </div>
     );
-};
+});
 
