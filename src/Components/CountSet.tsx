@@ -4,31 +4,22 @@ import {Button} from "./Button";
 import {InputSet} from "./InputSet";
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../bll/store";
-import {CountDataType} from "../bll/counter-reducer";
+import {InitialStateType} from "../bll/counter-reducer";
 import {changeMaxValueAC, changeMinValueAC, resetCountResultAC} from "../bll/actions";
 
-type CountSetPropsType = {
-    setCorrectData: (correctData:boolean) => void
-}
-
-export const CountSet: React.FC<CountSetPropsType> = React.memo(({setCorrectData}) => {
-    // let disabledCondition = minValue >= maxValue || minValue < 0
+export const CountSet: React.FC = React.memo((props) => {
 
     const dispatch = useDispatch()
-    const {minValue, maxValue} = useSelector<RootStateType, CountDataType>( state => state.counter.countData)
-
-    const changingMinValue =(newInputValue:number)=> {
-        dispatch(changeMinValueAC(newInputValue))
-        setCorrectData(false)
+    const {minValue, maxValue} = useSelector<RootStateType, InitialStateType>(state => state.counter)
+    const changingMinValue = (newInputValue: number) => {
+        dispatch(changeMinValueAC(newInputValue, false))
     }
-    const changingMaxValue =(newInputValue:number)=> {
-        dispatch(changeMaxValueAC(newInputValue))
-        setCorrectData(false)
+    const changingMaxValue = (newInputValue: number) => {
+        dispatch(changeMaxValueAC(newInputValue, false))
     }
 
     const settingCount = () => {
-        dispatch(resetCountResultAC(minValue))
-        setCorrectData(true)
+        dispatch(resetCountResultAC(minValue, true))
     }
     return (
         <div className={s.container}>
